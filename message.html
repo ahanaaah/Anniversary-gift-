@@ -1,0 +1,238 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Your Special Message</title>
+    <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@300;400;600&family=Playfair+Display:wght@400;700&family=Poppins:wght@200;300&display=swap" rel="stylesheet">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            background: linear-gradient(135deg, #0f0f23 0%, #1a1a2e 30%, #16213e 70%, #0a0a0a 100%);
+            min-height: 100vh;
+            font-family: 'Poppins', sans-serif;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            padding: 1rem;
+            position: relative;
+            overflow: auto; /* Allow scroll for long content */
+        }
+
+        .particles, .hearts-container {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            pointer-events: none;
+            z-index: 1;
+        }
+
+        .particle {
+            position: absolute;
+            width: 2px;
+            height: 2px;
+            background: rgba(255, 87, 34, 0.3);
+            border-radius: 50%;
+            animation: drift 25s linear infinite;
+        }
+
+        @keyframes drift {
+            0% { transform: translateY(100vh); opacity: 0; }
+            10% { opacity: 0.5; }
+            90% { opacity: 0.5; }
+            100% { transform: translateY(-30vh); opacity: 0; }
+        }
+
+        .heart {
+            position: absolute;
+            color: #ff5722;
+            font-size: 12px;
+            animation: elegantFloat 18s cubic-bezier(0.25, 0.46, 0.45, 0.94) infinite;
+            opacity: 0.4;
+        }
+
+        @keyframes elegantFloat {
+            0% { transform: translateY(100vh) scale(0.6); opacity: 0; }
+            15% { opacity: 0.5; transform: translateY(70vh) scale(1); }
+            50% { transform: translateY(20vh) scale(1.1); }
+            100% { transform: translateY(-50vh) scale(0.6); opacity: 0; }
+        }
+
+        /* FULL SCREEN CONTAINER FOR LONG TEXT */
+        .container {
+            background: rgba(255, 255, 255, 0.04);
+            backdrop-filter: blur(25px);
+            border: 1px solid rgba(255, 87, 34, 0.15);
+            border-radius: 24px;
+            padding: 4rem 3rem;
+            max-width: 950px;
+            width: 95%;
+            max-height: 90vh;
+            overflow-y: auto; /* SCROLLBAR for long messages */
+            text-align: center;
+            box-shadow: 
+                0 30px 80px rgba(0, 0, 0, 0.7),
+                inset 0 1px 0 rgba(255, 255, 255, 0.08);
+            z-index: 10;
+            position: relative;
+            animation: fadeInElegant 2.5s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+            scrollbar-width: thin;
+            scrollbar-color: rgba(255,87,34,0.5) transparent;
+        }
+
+        .container::-webkit-scrollbar {
+            width: 6px;
+        }
+
+        .container::-webkit-scrollbar-track {
+            background: transparent;
+        }
+
+        .container::-webkit-scrollbar-thumb {
+            background: rgba(255,87,34,0.5);
+            border-radius: 3px;
+        }
+
+        @keyframes fadeInElegant {
+            from { opacity: 0; transform: translateY(40px) scale(0.97); }
+            to { opacity: 1; transform: translateY(0) scale(1); }
+        }
+
+        /* 🖋️ EDITABLE TITLE - BIGGER */
+        .title {
+            font-family: 'Playfair Display', serif;
+            font-size: clamp(2.5rem, 6vw, 4rem);
+            font-weight: 700;
+            color: #ffffff;
+            margin-bottom: 2rem;
+            letter-spacing: -1px;
+            line-height: 1;
+            text-shadow: 2px 2px 8px rgba(0,0,0,0.8);
+            position: relative;
+        }
+
+        .title::after {
+            content: '';
+            position: absolute;
+            bottom: -15px;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 120px;
+            height: 2px;
+            background: linear-gradient(90deg, transparent, #ff5722, transparent);
+        }
+
+        /* 🖋️ PERFECT LONG MESSAGE - RESPONSIVE */
+        .message {
+            font-family: 'Cormorant Garamond', serif;
+            font-size: clamp(1.1rem, 2.2vw, 1.35rem);
+            font-weight: 300;
+            color: rgba(255, 255, 255, 0.95);
+            line-height: 1.85;
+            letter-spacing: 0.3px;
+            text-shadow: 1px 1px 4px rgba(0,0,0,0.9);
+            margin-bottom: 3.5rem;
+            text-align: left; /* Left align for long text */
+            max-width: 750px;
+            margin-left: auto;
+            margin-right: auto;
+        }
+
+        /* Classy Button - Fixed Position */
+        .back-btn {
+            font-family: 'Playfair Display', serif;
+            font-size: 1.1rem;
+            font-weight: 400;
+            color: #ffffff;
+            background: rgba(255, 87, 34, 0.18);
+            border: 2px solid rgba(255, 87, 34, 0.35);
+            padding: 1.1rem 2.8rem;
+            border-radius: 0;
+            cursor: pointer;
+            transition: all 0.4s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+            text-decoration: none;
+            text-transform: uppercase;
+            letter-spacing: 1.2px;
+            backdrop-filter: blur(20px);
+            position: sticky;
+            bottom: 2rem;
+            display: block;
+            margin: 0 auto;
+        }
+
+        .back-btn:hover {
+            background: rgba(255, 87, 34, 0.3);
+            border-color: rgba(255, 87, 34, 0.7);
+            transform: translateY(-3px);
+            box-shadow: 0 15px 45px rgba(255, 87, 34, 0.35);
+        }
+
+        @media (max-width: 768px) {
+            .container {
+                width: 98%;
+                padding: 3rem 2rem;
+                margin: 0.5rem;
+                max-height: 95vh;
+            }
+            .message {
+                font-size: 1.1rem;
+                line-height: 1.75;
+                text-align: center;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="particles" id="particles"></div>
+    <div class="hearts-container" id="heartsContainer"></div>
+    
+    <div class="container">
+        <!-- 🖋️ EDIT YOUR TITLE HERE -->
+        <h1 class="title">My Sweetheart</h1>
+        
+        <!-- 🖋️ PASTE YOUR LONG MESSAGE HERE -->
+        <div class="message" id="messageContent">
+             Happy Anniversary shona. i don't know where to start. i'm so so happy to have you in my life shona. you were the best thing that ever happend to me 2 years ago on this day. you are so precious to me yk that? you are the most sweetest, loving, caring, goofyyyy,genuine person i have ever met. I would rather die than to loose you my love. we have been through so much these past 2 years and ik my dumbass won't stop doing stupid shits so yea be with me for a long time ( till the day i die) okay? idc if you scold me, dont ttm for hours, even slap me but dont leave me ever. you are everything i have ever wanted from god yk that? i love you sooo sooo sooooooooooo muchhhh myyy sweett lill babyyyyyyyyyy. i never wanna loose you and i'll do everything that will make you stay in my life for a long time. again happy anniversary my love. i love you so muchhhhhh mwaaahhhhh mwahhhhhhhh. 💖<br><br>
+            
+            Forever yours,<br>
+            ✨ [Your Ahuu ]
+        </div>
+        
+        <a href="index.html" class="back-btn">← Return Home</a>
+    </div>
+
+    <script>
+        function createParticle() {
+            const p = document.createElement('div');
+            p.className = 'particle';
+            p.style.left = Math.random() * 100 + 'vw';
+            p.style.animationDuration = (Math.random() * 15 + 20) + 's';
+            document.getElementById('particles').appendChild(p);
+            setTimeout(() => p.remove(), 35000);
+        }
+
+        function createHeart() {
+            const h = document.createElement('div');
+            h.className = 'heart';
+            h.innerHTML = '♥';
+            h.style.left = Math.random() * 100 + 'vw';
+            h.style.animationDuration = (Math.random() * 6 + 14) + 's';
+            h.style.fontSize = (Math.random() * 5 + 10) + 'px';
+            document.getElementById('heartsContainer').appendChild(h);
+            setTimeout(() => h.remove(), 22000);
+        }
+
+        setInterval(createHeart, 1800);
+        setInterval(createParticle, 4500);
+        for(let i = 0; i < 5; i++) setTimeout(createHeart, i * 600);
+    </script>
+</body>
+</html>

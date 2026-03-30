@@ -1,0 +1,316 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>HAPPY ANNIVERSARY NAFUU</title>
+    <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@300;400;600&family=Playfair+Display:wght@400;700&family=Poppins:wght@200;300&display=swap" rel="stylesheet">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            background: linear-gradient(135deg, #0a0a0a 0%, #1a1a2e 50%, #16213e 100%);
+            height: 100vh;
+            overflow: hidden;
+            font-family: 'Poppins', sans-serif;
+            position: relative;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            color: #ffffff;
+        }
+
+        /* Subtle Particle Background */
+        .particles {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            pointer-events: none;
+            z-index: 1;
+        }
+
+        .particle {
+            position: absolute;
+            width: 2px;
+            height: 2px;
+            background: rgba(255, 87, 34, 0.6);
+            border-radius: 50%;
+            animation: drift 20s linear infinite;
+        }
+
+        @keyframes drift {
+            0% {
+                transform: translateY(100vh) translateX(0);
+                opacity: 0;
+            }
+            10% { opacity: 0.8; }
+            90% { opacity: 0.8; }
+            100% {
+                transform: translateY(-20vh) translateX(100px);
+                opacity: 0;
+            }
+        }
+
+        /* Elegant Hearts */
+        .hearts-container {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            pointer-events: none;
+            z-index: 2;
+        }
+
+        .heart {
+            position: absolute;
+            color: #ff5722;
+            font-size: 16px;
+            animation: elegantFloat 12s cubic-bezier(0.25, 0.46, 0.45, 0.94) infinite;
+            opacity: 0.6;
+            filter: drop-shadow(0 0 8px rgba(255, 87, 34, 0.5));
+        }
+
+        @keyframes elegantFloat {
+            0% {
+                transform: translateY(100vh) rotate(-10deg) scale(0.8);
+                opacity: 0;
+            }
+            15% {
+                opacity: 0.7;
+                transform: translateY(80vh) rotate(0deg) scale(1);
+            }
+            50% {
+                transform: translateY(30vh) rotate(5deg) scale(1.1);
+            }
+            85% {
+                opacity: 0.7;
+                transform: translateY(-10vh) rotate(10deg) scale(1);
+            }
+            100% {
+                transform: translateY(-30vh) rotate(15deg) scale(0.8);
+                opacity: 0;
+            }
+        }
+
+        /* Main Content */
+        .main-container {
+            position: relative;
+            z-index: 10;
+            text-align: center;
+            max-width: 900px;
+            padding: 0 2rem;
+            animation: fadeInElegant 2.5s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+        }
+
+        @keyframes fadeInElegant {
+            from {
+                opacity: 0;
+                transform: translateY(40px) scale(0.95);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0) scale(1);
+            }
+        }
+
+        .main-title {
+            font-family: 'Playfair Display', serif;
+            font-size: clamp(4.5rem, 11vw, 10rem);
+            font-weight: 700;
+            color: #ffffff;
+            line-height: 0.9;
+            margin-bottom: 1rem;
+            letter-spacing: -2px;
+            position: relative;
+            text-shadow: 
+                2px 2px 4px rgba(0,0,0,0.5),
+                0 0 30px rgba(255, 87, 34, 0.3);
+        }
+
+        .main-title::after {
+            content: '';
+            position: absolute;
+            bottom: -15px;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 120px;
+            height: 2px;
+            background: linear-gradient(90deg, transparent, #ff5722, transparent);
+            border-radius: 1px;
+        }
+
+        .subtitle {
+            font-family: 'Cormorant Garamond', serif;
+            font-size: clamp(1.8rem, 5vw, 3rem);
+            font-weight: 300;
+            color: rgba(255, 255, 255, 0.9);
+            margin-bottom: 3.5rem;
+            letter-spacing: 1px;
+            text-shadow: 1px 1px 3px rgba(0,0,0,0.7);
+            position: relative;
+        }
+
+        /* Classy Button */
+        .click-btn {
+            font-family: 'Playfair Display', serif;
+            font-size: clamp(1.4rem, 3.5vw, 2rem);
+            font-weight: 400;
+            color: #ffffff;
+            background: rgba(255, 87, 34, 0.15);
+            border: 2px solid rgba(255, 87, 34, 0.4);
+            padding: 1.2rem 3.5rem;
+            border-radius: 0;
+            cursor: pointer;
+            position: relative;
+            overflow: hidden;
+            letter-spacing: 1px;
+            text-transform: uppercase;
+            text-decoration: none;
+            display: inline-block;
+            transition: all 0.4s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+            backdrop-filter: blur(15px);
+            box-shadow: 
+                0 8px 32px rgba(0,0,0,0.4),
+                inset 0 1px 0 rgba(255,255,255,0.1);
+        }
+
+        .click-btn::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, 
+                transparent 0%,
+                rgba(255, 87, 34, 0.2) 50%,
+                transparent 100%);
+            transition: left 0.6s ease;
+        }
+
+        .click-btn:hover::before {
+            left: 100%;
+        }
+
+        .click-btn:hover {
+            background: rgba(255, 87, 34, 0.25);
+            border-color: rgba(255, 87, 34, 0.7);
+            transform: translateY(-3px);
+            box-shadow: 
+                0 15px 40px rgba(255, 87, 34, 0.3),
+                0 5px 15px rgba(0,0,0,0.4),
+                inset 0 1px 0 rgba(255,255,255,0.2);
+        }
+
+        .click-btn:active {
+            transform: translateY(-1px);
+        }
+
+        /* Decorative Elements */
+        .accent {
+            position: absolute;
+            width: 1px;
+            height: 50px;
+            background: linear-gradient(to bottom, transparent, #ff5722, transparent);
+            opacity: 0.6;
+        }
+
+        .accent.left {
+            left: 10%;
+            top: 20%;
+            animation: sway 8s ease-in-out infinite;
+        }
+
+        .accent.right {
+            right: 10%;
+            top: 60%;
+            animation: sway 10s ease-in-out infinite reverse;
+        }
+
+        @keyframes sway {
+            0%, 100% { transform: rotate(-2deg); }
+            50% { transform: rotate(2deg); }
+        }
+
+        /* Responsive */
+        @media (max-width: 768px) {
+            .main-container {
+                padding: 0 1.5rem;
+            }
+            .subtitle {
+                margin-bottom: 2.5rem;
+            }
+            .click-btn {
+                padding: 1rem 2.5rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Subtle Particles -->
+    <div class="particles" id="particles"></div>
+    
+    <!-- Elegant Hearts -->
+    <div class="hearts-container" id="heartsContainer"></div>
+    
+    <!-- Decorative Accents -->
+    <div class="accent left"></div>
+    <div class="accent right"></div>
+    
+    <!-- Main Content -->
+    <div class="main-container">
+        <h1 class="main-title">HAPPY ANNIVERSARY</h1>
+        <h2 class="subtitle">Nafuu</h2>
+        <a href="message.html" class="click-btn">Click me </a>
+    </div>
+
+    <script>
+        // Create subtle particles
+        function createParticle() {
+            const particle = document.createElement('div');
+            particle.className = 'particle';
+            particle.style.left = Math.random() * 100 + 'vw';
+            particle.style.animationDuration = (Math.random() * 10 + 15) + 's';
+            particle.style.animationDelay = Math.random() * 5 + 's';
+            
+            document.getElementById('particles').appendChild(particle);
+            setTimeout(() => particle.remove(), 25000);
+        }
+
+        // Create elegant hearts
+        function createHeart() {
+            const heart = document.createElement('div');
+            heart.className = 'heart';
+            heart.innerHTML = '♥';
+            heart.style.left = Math.random() * 100 + 'vw';
+            heart.style.animationDuration = (Math.random() * 4 + 10) + 's';
+            heart.style.animationDelay = Math.random() * 2 + 's';
+            heart.style.fontSize = (Math.random() * 8 + 14) + 'px';
+            
+            document.getElementById('heartsContainer').appendChild(heart);
+            setTimeout(() => heart.remove(), 15000);
+        }
+
+        // Initialize
+        for(let i = 0; i < 50; i++) {
+            setTimeout(createParticle, i * 200);
+        }
+        
+        setInterval(createHeart, 1200);
+        setInterval(createParticle, 3000);
+
+        // Initial hearts
+        for(let i = 0; i < 8; i++) {
+            setTimeout(createHeart, i * 400);
+        }
+    </script>
+</body>
+</html>
